@@ -36,10 +36,11 @@ button {
     text-align: center;
     border: 2px solid black;
     border-width: 0;
-    width: 40%;
+    width: 30%;
     min-width: fit-content;
-    margin: 5vh auto;
-    padding: 2rem;
+
+    margin: 6vh auto;
+    padding: 1.6rem;
     border-radius: 2rem;
     background-color: #ffe2d6;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
@@ -155,6 +156,16 @@ h2 {
     line-height: 150%;
 }
 
+footer {
+    text-align: center;
+    background-color: #fac4bb;
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+    padding: 0.4rem;
+    opacity: 0.7;
+}
+
 @media (max-width: 980px) {
     body {
         background-color: #ffe2d6;
@@ -164,5 +175,10 @@ h2 {
         border-radius: 0;
         box-shadow: none;
         padding: 0;
+    }
+
+    footer {
+        background-color: #dd5f7b;
+        font-size: 0.8rem;
     }
 }
