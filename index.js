@@ -125,6 +125,7 @@ const calcValue = (hand) => {
 
 // Textbox that show when someone wins or lose.
 const showTextBox = (text) => {
+    scrollToTop()
     textBox.children[0].children[0].innerHTML = text
     textBox.style.display = 'flex' // Make it visible
     buttonContainer.style.display = 'none' // Make buttons not visible
@@ -217,6 +218,7 @@ const clearHands = () => {
 
 // Start the game with 4 * 52 cards (208)
 const play = () => {
+    updateFooterPosition()
     // if its less then 10 cards shuffle 4 decks
     if (allDecks.length < 10) shuffleDecks(4)
     clearHands()
@@ -237,6 +239,10 @@ function updateFooterPosition() {
         footer.style.position = 'absolute'
         footer.style.bottom = '0'
     }
+}
+
+function scrollToTop() {
+    window.scrollTo(0, 0)
 }
 
 hit.addEventListener('click', hitPlayer)
