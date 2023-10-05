@@ -218,7 +218,6 @@ const clearHands = () => {
 
 // Start the game with 4 * 52 cards (208)
 const play = () => {
-    updateFooterPosition()
     // if its less then 10 cards shuffle 4 decks
     if (allDecks.length < 10) shuffleDecks(4)
     clearHands()
@@ -226,6 +225,7 @@ const play = () => {
 
     textBox.style.display = 'none'
     buttonContainer.style.display = 'block'
+    updateFooterPosition()
 }
 
 // Fix footer position
