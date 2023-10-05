@@ -126,6 +126,8 @@ const calcValue = (hand) => {
 // Textbox that show when someone wins or lose.
 const showTextBox = (text) => {
     scrollToTop()
+    footer.style.display = 'none'
+
     textBox.children[0].children[0].innerHTML = text
     textBox.style.display = 'flex' // Make it visible
     buttonContainer.style.display = 'none' // Make buttons not visible
@@ -225,6 +227,7 @@ const play = () => {
 
     textBox.style.display = 'none'
     buttonContainer.style.display = 'block'
+    footer.style.display = 'block'
     updateFooterPosition()
 }
 
@@ -241,6 +244,7 @@ function updateFooterPosition() {
     }
 }
 
+// Scrolls to top
 function scrollToTop() {
     window.scrollTo(0, 0)
 }
