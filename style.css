@@ -9,6 +9,7 @@
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #e28b8e;
+    overflow-x: hidden;
 }
 
 button {
