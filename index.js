@@ -29,6 +29,7 @@ const pass = document.getElementById('pass-button')
 const buttonContainer = document.getElementById('button-container')
 const textBox = document.getElementById('text-box')
 const nextHand = document.getElementById('next-hand-button')
+const footer = document.getElementById('footer')
 
 // Create 1 deck. 52 cards, 13 each
 const createDeck = () => {
@@ -159,6 +160,8 @@ const hitPlayer = () => {
     } /* else if (handValue === 21) {
         showTextBox(`BlackJack!!! You won!`)
     } */ // This shows up before button is pressed.
+
+    updateFooterPosition() // Check if footer have to be moved
 }
 
 // When pass button is pressed
@@ -221,6 +224,19 @@ const play = () => {
 
     textBox.style.display = 'none'
     buttonContainer.style.display = 'block'
+}
+
+// Fix footer position
+function updateFooterPosition() {
+    const pageHeight = document.documentElement.scrollHeight
+    const windowHeight = window.innerHeight
+
+    if (pageHeight > windowHeight) {
+        footer.style.position = 'relative'
+    } else {
+        footer.style.position = 'absolute'
+        footer.style.bottom = '0'
+    }
 }
 
 hit.addEventListener('click', hitPlayer)
