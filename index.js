@@ -1,3 +1,4 @@
+/* Cards arrays */
 const values = [
     'A',
     '2',
@@ -19,9 +20,11 @@ let allDecks = []
 let dealerHand = []
 let playerHand = []
 
+/* New cards */
 const cardModel = document.createElement('div')
 cardModel.classList.add('card')
 
+/* Variables from HTML */
 const dealer = document.getElementById('dealer')
 const player = document.getElementById('player')
 const hit = document.getElementById('hit-button')
@@ -169,7 +172,7 @@ const hitPlayer = () => {
 
 // When pass button is pressed
 const hitDealer = () => {
-    // First check if user gotm blackjack
+    // First check if user got blackjack
     let userHandValue = calcValue(playerHand)
     if (userHandValue === 21) {
         showTextBox('BlackJack!!! You won!!!')
@@ -221,7 +224,9 @@ const clearHands = () => {
 // Start the game with 4 * 52 cards (208)
 const play = () => {
     // if its less then 10 cards shuffle 4 decks
-    if (allDecks.length < 10) shuffleDecks(4)
+    if (allDecks.length < 20) {
+        shuffleDecks(4)
+    }
     clearHands()
     dealHands()
 
