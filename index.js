@@ -29,6 +29,7 @@ const dealerScore = document.getElementById('dealer-score')
 const userScore = document.getElementById('user-score')
 const dealer = document.getElementById('dealer')
 const player = document.getElementById('player')
+const displayHandValue = document.getElementById('user-hand-value')
 const hit = document.getElementById('hit-button')
 const pass = document.getElementById('pass-button')
 const buttonContainer = document.getElementById('button-container')
@@ -89,6 +90,8 @@ const dealHands = () => {
         }
         player.append(newCard)
     })
+    let startHand = calcValue(playerHand)
+    displayHandValue.innerHTML = startHand
 }
 
 //  Calc the value of the hand (argument)
@@ -167,6 +170,7 @@ const hitPlayer = () => {
     player.append(newCardNode)
     // Calc the new value and show text box if its > 21
     const handValue = calcValue(playerHand)
+    displayHandValue.innerHTML = handValue
     if (handValue > 21) {
         dealerScore.innerHTML++
         saveData()
@@ -242,6 +246,8 @@ const play = () => {
         shuffleDecks(4)
     }
     clearHands()
+    displayHandValue.innerHTML = ''
+
     dealHands()
 
     textBox.style.display = 'none'
