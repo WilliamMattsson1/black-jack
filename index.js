@@ -25,6 +25,8 @@ const cardModel = document.createElement('div')
 cardModel.classList.add('card')
 
 /* Variables from HTML */
+const dealerScore = document.getElementById('dealer-score')
+const userScore = document.getElementById('user-score')
 const dealer = document.getElementById('dealer')
 const player = document.getElementById('player')
 const hit = document.getElementById('hit-button')
@@ -144,8 +146,12 @@ const decideWinner = async () => {
     if (playerValue === dealerValue) {
         text = `Tie! Both had: ${playerValue} points.`
     } else if (playerValue > dealerValue) {
-        text = `You Won! You had: ${playerValue} points and Dealer had: ${dealerValue}`
+        userScore.innerHTML++
+        saveData()
+        text = `You Win! You had: ${playerValue} points and Dealer had: ${dealerValue}`
     } else {
+        dealerScore.innerHTML++
+        saveData()
         text = `You lost.. You had: ${playerValue} points and Dealer had: ${dealerValue} points.`
     }
     showTextBox(text)
@@ -162,9 +168,11 @@ const hitPlayer = () => {
     // Calc the new value and show text box if its > 21
     const handValue = calcValue(playerHand)
     if (handValue > 21) {
+        dealerScore.innerHTML++
+        saveData()
         showTextBox(`You got: ${handValue}.. Dealer wins`)
     } /* else if (handValue === 21) {
-        showTextBox(`BlackJack!!! You won!`)
+        showTextBox(`BlackJack!!! You win!`)
     } */ // This shows up before button is pressed.
 
     updateFooterPosition() // Check if footer have to be moved
@@ -175,7 +183,9 @@ const hitDealer = () => {
     // First check if user got blackjack
     let userHandValue = calcValue(playerHand)
     if (userHandValue === 21) {
-        showTextBox('BlackJack!!! You won!!!')
+        userScore.innerHTML++
+        saveData()
+        showTextBox('BlackJack!!! You win!!!')
         return
     }
 
@@ -201,9 +211,13 @@ const hitDealer = () => {
         hitDealer()
         // Blackjack
     } else if (handValue === 21) {
+        dealerScore.innerHTML++
+        saveData()
         showTextBox('BlackJack!!! Dealer wins')
     } else if (handValue > 21) {
-        showTextBox(`Dealer got: ${handValue}.. You Won!`)
+        userScore.innerHTML++
+        saveData()
+        showTextBox(`Dealer got: ${handValue}.. You Win!`)
     } else {
         // decide winner
         decideWinner()
@@ -234,6 +248,7 @@ const play = () => {
     buttonContainer.style.display = 'block'
     footer.style.display = 'block'
     updateFooterPosition()
+    showScore()
 }
 
 // Fix footer position
@@ -252,6 +267,18 @@ function updateFooterPosition() {
 // Scrolls to top
 function scrollToTop() {
     window.scrollTo(0, 0)
+}
+
+// Save score to localStorage
+function saveData() {
+    localStorage.setItem('dealerScore', dealerScore.innerHTML)
+    localStorage.setItem('userScore', userScore.innerHTML)
+}
+
+// Display score when play()
+function showScore() {
+    dealerScore.innerHTML = localStorage.getItem('dealerScore')
+    userScore.innerHTML = localStorage.getItem('userScore')
 }
 
 hit.addEventListener('click', hitPlayer)
