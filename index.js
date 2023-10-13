@@ -277,8 +277,20 @@ function saveData() {
 
 // Display score when play()
 function showScore() {
-    dealerScore.innerHTML = localStorage.getItem('dealerScore')
-    userScore.innerHTML = localStorage.getItem('userScore')
+    const dealerScoreValue = localStorage.getItem('dealerScore')
+    const userScoreValue = localStorage.getItem('userScore')
+
+    if (dealerScoreValue > 0) {
+        dealerScore.innerHTML = dealerScoreValue
+    } else {
+        dealerScore.innerHTML = 0
+    }
+
+    if (userScoreValue > 0) {
+        userScore.innerHTML = userScoreValue
+    } else {
+        userScore.innerHTML = 0
+    }
 }
 
 hit.addEventListener('click', hitPlayer)
