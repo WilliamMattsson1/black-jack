@@ -69,15 +69,10 @@ const selectRandomCard = () => {
 // Deal hands to dealer and player. 2 cards
 const dealHands = () => {
     dealerHand = [selectRandomCard(), selectRandomCard()]
-    dealerHand.forEach((card, index) => {
-        const newCard = cardModel.cloneNode(true) // ????
-        // Hide one of dealers cards.
-        index === 0 ? newCard.classList.add('back') : (newCard.innerHTML = card)
-
-        // Makes ♦ and ♥ cards red
-        if (card[0] === '♦' || card[0] === '♥') {
-            newCard.classList.add('red')
-        }
+    dealerHand.forEach((card) => {
+        const newCard = cardModel.cloneNode(true)
+        newCard.innerHTML = card
+        newCard.classList.add('back')
         dealer.append(newCard)
     })
     playerHand = [selectRandomCard(), selectRandomCard()]
@@ -175,10 +170,7 @@ const hitPlayer = () => {
         dealerScore.innerHTML++
         saveData()
         showTextBox(`You got: ${handValue}.. Dealer wins`)
-    } /* else if (handValue === 21) {
-        showTextBox(`BlackJack!!! You win!`)
-    } */ // This shows up before button is pressed.
-
+    }
     updateFooterPosition() // Check if footer have to be moved
 }
 
@@ -194,9 +186,10 @@ const hitDealer = () => {
     }
 
     // Reveal black card
-    const hiddenCard = dealer.children[0]
-    hiddenCard.classList.remove('back')
-    hiddenCard.innerHTML = dealerHand[0]
+    dealer.childNodes.forEach((card) => {
+        card.classList.remove('back')
+    })
+
     //Calc hand value of dealer
     let handValue = calcValue(dealerHand)
     // if hand < 16 --> add one more card
